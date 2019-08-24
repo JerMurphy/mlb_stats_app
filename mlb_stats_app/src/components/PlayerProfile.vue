@@ -4,49 +4,39 @@
             <v-col :md="1">
             </v-col>
             <v-col :md="3">
-                <v-img :src="getImage(id)" contain height="400px" width="300px"></v-img>
-            </v-col>
-            <v-col :md="6"  style="margin-top: 100px; text-align: center">
-                 <h1>{{player.fullName}} #{{player.primaryNumber}}</h1>
+                <v-img :src="getImage(id)" contain height="300px" width="200px" style="margin-left: 70px; text-align: center"></v-img>
+                <h1>{{player.fullName}} #{{player.primaryNumber}}</h1>
                  <h3>{{player.primaryPosition.name}} </h3>
+            </v-col>
+            <v-col :md="6"  style="margin-top: 50px; text-align: center">
+                 <h2>Player Profile </h2>
                  <v-row align="center" justify="center">
                     <v-col :md="3">
-                        <h1> </h1>
-                        <p> Batting %</p>
+                        <h1>{{player.height}} </h1>
+                        <p> Height</p>
                     </v-col>
                        <v-col :md="3">
-                        <h1> </h1>
-                        <p>On-Base %</p>
+                        <h1> {{player.weight}}lbs</h1>
+                        <p>Weight</p>
                     </v-col>
                        <v-col :md="3">
-                        <h1> </h1>
-                        <p> Slugging %</p>
+                        <h1> {{player.currentAge}}</h1>
+                        <p> Age</p>
                     </v-col>
                  </v-row>
                  <v-row align="center" justify="center">
-                    <v-col :md="2">
-                        <h4>  </h4>
-                        <p>HR</p>
+                    <v-col :md="3">
+                        <h2>{{player.birthDate}} </h2>
+                        <p> Birth Date</p>
                     </v-col>
-                    <v-col :md="2">
-                        <h4>  </h4>
-                        <p>RBI's.</p>
+                       <v-col :md="3">
+                        <h4> {{player.birthCity}},{{player.birthCountry}}</h4>
+                        <p>Birth Place</p>
                     </v-col>
-                    <v-col :md="2">
-                        <h4> </h4>
-                        <p>Walks</p>
-                    </v-col>
-                    <v-col :md="2">
-                        <h4>  </h4>
-                        <p>Hits (H)</p>
-                    </v-col>
-                    <v-col :md="2">
-                        <h4>  </h4>
-                        <p> Strikeouts (K)</p>
-                    </v-col>
-                    <v-col :md="2">
-                        <h4> </h4>
-                        <p>H / K Ratio</p>
+                       <v-col :md="3">
+                        <h2 v-if="player.draftYear"> {{player.draftYear}}</h2>
+                        <h2 v-if="!player.draftYear"> N/A</h2>
+                        <p> Drafted</p>
                     </v-col>
                  </v-row>
             </v-col>
