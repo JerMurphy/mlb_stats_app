@@ -1,5 +1,23 @@
 <template>
   <v-app>
+    <v-card
+    color="grey lighten-4"
+    flat
+    height=""
+    tile
+  >
+    <v-toolbar dense>
+      <v-btn v-on:click="navigate()">
+        Teams
+      </v-btn>
+      <div class="flex-grow-1">
+          TEAM NAME GOES HERE
+      </div>
+       <v-toolbar-items>
+        <!-- <v-select items=[] label="Teams" solo ></v-select> -->
+      </v-toolbar-items>
+    </v-toolbar>
+  </v-card>
     <TeamStat v-if="roster[0]" v-bind:id="id" v-bind:roster="roster"/>
     <FullRoster v-if="roster[0]" v-bind:id="id" v-bind:roster="roster"/>
     <div v-if="!roster[0]">
@@ -37,9 +55,15 @@ export default {
     axios.get('https://statsapi.mlb.com/api/v1/teams/'+ this.id +'/roster/Active?hydrate=person(stats(type=season))')
     .then(res => this.roster = res.data.roster)
     .catch(err=> alert(err));
+  },
+  methods:{
+    navigate(){
+        this.$router.go(-1)
+    }
   }
 };
 </script>
 <style >
   
+
 </style>

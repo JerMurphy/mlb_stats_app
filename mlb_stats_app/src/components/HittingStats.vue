@@ -40,10 +40,9 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="year in stats" :key="year.season" > 
+        <tr v-for="year in stats" :key="year.season" v-if="year.team"> 
             <td class="text-center">{{year.season}}</td>
-            <td v-if="year.team" class="text-center">{{year.team.name}}</td>
-            <td v-if="!year.team" class="text-center">Unlisted</td>
+            <td class="text-center">{{year.team.name}}</td>
             <td class="text-center">{{year.stat.avg}}</td>
             <td class="text-center">{{year.stat.hits}}</td>
             <td class="text-center">{{year.stat.doubles}}</td>
