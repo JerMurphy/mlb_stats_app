@@ -1,23 +1,5 @@
 <template>
   <v-app>
-    <v-card
-    color="grey lighten-4"
-    flat
-    height=""
-    tile
-  >
-    <v-toolbar dense>
-      <v-btn v-on:click="navigate()">
-        Teams
-      </v-btn>
-      <div class="flex-grow-1">
-          TEAM NAME GOES HERE
-      </div>
-       <v-toolbar-items>
-        <!-- <v-select items=[] label="Teams" solo ></v-select> -->
-      </v-toolbar-items>
-    </v-toolbar>
-  </v-card>
     <TeamStat v-if="roster[0]" v-bind:id="id" v-bind:roster="roster"/>
     <FullRoster v-if="roster[0]" v-bind:id="id" v-bind:roster="roster"/>
     <div v-if="!roster[0]">

@@ -21,7 +21,7 @@
             <tr v-for="player in roster" :key="player.person.id" v-if="player.person.primaryPosition.name != 'Pitcher'"> 
                 <td>
                     <!-- <img :src="getImage(player.person.id)" height="90px" width="75px"> -->
-                    <v-avatar size="64px" class="avatar">
+                    <v-avatar size="75px" class="avatar">
                         <img :src="getImage(player.person.id)">
                     </v-avatar>
                 </td>
@@ -60,7 +60,7 @@
             <tr v-for="player in roster" :key="player.person.id" v-if="player.person.primaryPosition.name == 'Pitcher'">
                 <td>
                     <!-- <img :src="getImage(player.person.id)" height="90px" width="75px"> -->
-                    <v-avatar size="64px" class="avatar">
+                    <v-avatar size="75px" class="avatar">
                         <img :src="getImage(player.person.id)">
                     </v-avatar>
                 </td>

@@ -1,5 +1,23 @@
 <template>
     <div class="teamStat">
+        <v-card
+    color="grey lighten-4"
+    flat
+    height=""
+    tile
+  >
+    <v-toolbar dense :color="colors[team_data.id].color">
+      <v-btn v-on:click="navigate()">
+        Teams
+      </v-btn>
+      <div class="flex-grow-1" :style="colors[team_data.id].text">
+          {{team_data.name}}
+      </div>
+       <v-toolbar-items>
+        <!-- <v-select items=[] label="Teams" solo ></v-select> -->
+      </v-toolbar-items>
+    </v-toolbar>
+  </v-card>
         <v-row  class="team">
             <v-col :md="1">
             </v-col>
@@ -60,6 +78,7 @@
 <script>
 import axios from 'axios';
 import _ from 'lodash';
+import colours from '../assets/colours';
 
 export default {
   name: 'TeamStat',
@@ -79,7 +98,9 @@ export default {
         imgsrc: String,
         avg: 'N/A',
         slg: 'N/A',
-        obp: "N/A"
+        obp: "N/A",
+        colors: Object,
+        textcolor: Object
     }
   },
   methods:{
@@ -138,9 +159,13 @@ export default {
         var newHits  = hits/gcd;
         var newK = strikeouts/gcd;
         return ""+newHits + " : " + newK;
+    },
+    navigate(){
+        this.$router.go(-1)
     }
   },
   created(){
+      this.colors = colours;
     this.calculateStats(this.roster);
     this.imgsrc = "https://www.mlbstatic.com/team-logos/"+this.id+".svg";
     axios.get('https://statsapi.mlb.com/api/v1/teams/'+ this.id).then(res => this.team_data = res.data.teams[0])
