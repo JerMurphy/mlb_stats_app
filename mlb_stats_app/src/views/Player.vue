@@ -1,21 +1,15 @@
 <template>
   <v-app>
-    <v-card
-    color="grey lighten-4"
-    flat
-    height=""
-    tile
-  >
-    <v-toolbar dense>
-      <v-btn v-on:click="navigate()">
-        Team Stats
-      </v-btn>
-      <div class="flex-grow-1">
-        <v-toolbar-title class="title">{{player.fullName}}</v-toolbar-title>
-      </div>
-    </v-toolbar>
-  </v-card>
-   <PlayerProfile v-bind:id="id" v-bind:player="player" v-if="player"/>
+    <v-card color="grey lighten-4" flat tile>
+        <v-toolbar dense :color="colors[tid].color">
+        <v-btn v-on:click="navigate()">
+            Teams Stats
+        </v-btn>
+        <div :style="colors[tid].text">{{player.fullName}}</div>
+        <div class="flex-grow-1" ></div>
+        </v-toolbar>
+    </v-card>
+   <PlayerProfile v-bind:id="pid" v-bind:player="player" v-if="player"/>
    <v-tabs fixed-tabs>
             <v-tab ripple v-for="type in player.stats" v-bind:key="type.group.displayName">
                  <v-icon>{{type.group.displayName.toUpperCase()}}</v-icon>
@@ -41,7 +35,7 @@ import PlayerProfile from '../components/PlayerProfile';
 import HittingStats from '../components/HittingStats';
 import FieldingStats from '../components/FieldingStats';
 import PitchingStats from '../components/PitchingStats';
-
+import colours from '../assets/colours';
 import axios from 'axios';
 
 export default {
@@ -59,8 +53,10 @@ export default {
     //
   }),
   created(){
-    this.id = this.$route.params.id
-    axios.get('https://statsapi.mlb.com/api/v1/people/'+ this.$route.params.id+'?hydrate=stats(group=[pitching,hitting,fielding],type=[yearByYear])')
+    this.pid = this.$route.params.pid
+    this.tid = this.$route.params.tid
+    this.colors = colours;
+    axios.get('https://statsapi.mlb.com/api/v1/people/'+ this.$route.params.pid+'?hydrate=stats(group=[pitching,hitting,fielding],type=[yearByYear])')
     .then(res => this.player = res.data.people[0])
     .catch(err => alert(err));
   },

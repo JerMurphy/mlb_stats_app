@@ -1,23 +1,19 @@
 <template>
     <div class="teamStat">
-        <v-card
-    color="grey lighten-4"
-    flat
-    height=""
-    tile
-  >
-    <v-toolbar dense :color="colors[team_data.id].color">
-      <v-btn v-on:click="navigate()">
-        Teams
-      </v-btn>
-      <div class="flex-grow-1" :style="colors[team_data.id].text">
-          {{team_data.name}}
-      </div>
-       <v-toolbar-items>
-        <!-- <v-select items=[] label="Teams" solo ></v-select> -->
-      </v-toolbar-items>
-    </v-toolbar>
-  </v-card>
+        <v-card color="grey lighten-4" flat tile>
+            <v-toolbar dense :color="colors[team_data.id].color">
+            <v-btn v-on:click="navigate()">
+                Teams
+            </v-btn>
+            <div :style="colors[team_data.id].text">{{team_data.name}}</div>
+            <div class="flex-grow-1" >
+                
+            </div>
+            <v-toolbar-items>
+                <!-- <v-select items=[] label="Teams" solo ></v-select> -->
+            </v-toolbar-items>
+            </v-toolbar>
+        </v-card>
         <v-row  class="team">
             <v-col :md="1">
             </v-col>

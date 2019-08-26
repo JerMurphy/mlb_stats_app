@@ -14,12 +14,12 @@ export default new Router({
       component: Home
     },
     {
-      path: '/team/:id',
+      path: '/team/:tid',
       name: 'about',
       component: Team
     },
     {
-      path: '/player/:id',
+      path: '/team/:tid/player/:pid',
       name: 'player',
       component: Player
     }

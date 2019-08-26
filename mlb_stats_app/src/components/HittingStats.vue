@@ -1,5 +1,6 @@
 <template>
 <div>
+    <h3> Overall Stats by Season</h3>
     <v-simple-table class="pitcherTable" height="300px" fixedHeader>
         <thead>
         <tr>
@@ -70,7 +71,7 @@ export default {
   },
   data() {
     return {
-    
+        panel: [[true]]
     }
   },
   created(){
@@ -95,6 +96,9 @@ export default {
    }
    .more:hover{
        text-decoration: underline;
+   }
+   .centered{
+       text-align: center;
    }
 
 </style>

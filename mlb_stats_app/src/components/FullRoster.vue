@@ -106,7 +106,7 @@ export default {
          return "https://securea.mlb.com/mlb/images/players/head_shot/"+id+".jpg"
      },
      gotoPlayer(id){
-        this.$router.push({ path: `/player/${id}` })
+        this.$router.push({ path: `/team/${this.id}/player/${id}` })
      }
   }
   

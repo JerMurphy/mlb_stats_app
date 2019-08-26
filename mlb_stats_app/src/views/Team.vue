@@ -32,8 +32,8 @@ export default {
     //
   }),
   created(){
-    this.id = this.$route.params.id
-    this.imgsrc = "https://www.mlbstatic.com/team-logos/"+this.$route.params.id+".svg";
+    this.id = this.$route.params.tid
+    this.imgsrc = "https://www.mlbstatic.com/team-logos/"+this.$route.params.tid+".svg";
     axios.get('https://statsapi.mlb.com/api/v1/teams/'+ this.id +'/roster/Active?hydrate=person(stats(type=season))')
     .then(res => this.roster = res.data.roster)
     .catch(err=> alert(err));
