@@ -55,9 +55,49 @@
             <td class="text-center">{{year.stat.obp}}</td>
             <td class="text-center">{{year.stat.slg}}</td>
             <td class="text-center">{{year.stat.ops}}</td>
+            <td class="text-center">
+                <div class="text-center">
+                    <v-dialog v-model="dialog" width="1000">
+                        <template v-slot:activator="{ on }">
+                            <v-btn dark v-on="on">More</v-btn>
+                        </template>
+                        <v-card>
+                            <v-card-title class="headline grey lighten-2" primary-title>
+                            <span class="centered">{{year.season}} - {{year.team.name}}</span>
+                            </v-card-title>
+                            <v-card-text>
+                            <v-row>
+                                <v-col>
+                                    <h3> Plate Appearence Breakdown</h3>
+                                    <h5> (Hits, Strikeouts,Walks)</h5>
+                                    <d3-pie
+                                        :data="getPlateData(year.stat.hits,year.stat.strikeOuts, year.stat.baseOnBalls)"
+                                        :options="options"
+                                        width="100%"
+                                        height="400px">
+                                    </d3-pie>
+                                </v-col>
+                                <v-col>
+                                    <h3> Hit Placement Breakdown</h3>
+                                    <h5> (Singles, Doubles, Triples, Home Runs)</h5>
+                                    <d3-pie
+                                        :data="getHitData(year.stat.hits,year.stat.doubles, year.stat.triples, year.stat.homeRuns)"
+                                        width="100%"
+                                        height="400px">
+                                    </d3-pie>
+                                </v-col>
+                            </v-row>
+                            </v-card-text>
+
+                            <v-divider></v-divider>
+                        </v-card>
+                    </v-dialog>
+                </div>
+            </td>
         </tr>
         </tbody>
     </v-simple-table>
+    
 </div>
 </template>
 
@@ -71,14 +111,19 @@ export default {
   },
   data() {
     return {
-        panel: [[true]]
+        data: [],
     }
   },
   created(){
     this.stats = _.orderBy(this.stats,['season'], ['desc'])
   },
   methods: {
-    
+    getPlateData(hits,str,walks){
+        return [{key: 'Hits', value: hits},{key: 'Strikeouts', value: str}, {key: 'Walks', value: walks}];
+    },
+    getHitData(hits,d,t,hr){
+        return [{key: 'Singles', value: hits-d-t-hr},{key: 'Doubles', value: d}, {key: 'Triples', value: t},{key: 'Home Runs', value: hr}];
+    }
   }
   
 }
