@@ -1,16 +1,17 @@
 <template>
   <div>
-    <h1>{{ msg }}</h1>
-    <p>
-      Please choose a team below to get started!
-    </p>
-  <v-container class="grey lighten-5">
-    <v-row justify="space-around">
-      <v-col v-for="team in teams" :key="team.id" cols="lg">
-        <TeamCard v-bind:team="team"/>
+    <v-row style="margin-left: 15px">
+      <v-col cols="lg-3">
+        <h3> Teams</h3>
+        <div style="overflow-y: auto; height:600px">
+          <TeamCard v-bind:team="team" v-for="team in teams" :key="team.id" class="teamdiv"/>
+        </div>
+      </v-col>
+      <v-col>
+        <h3> League Leaders</h3>
+        <LeagueLeaders/>
       </v-col>
     </v-row>
-  </v-container>
       <!-- <mdb-col md="4" v-for="team in teams" v-bind:key="team.id"> -->
         
         <!-- <b-card :img-src=returnImg(team.id) img-top id="teamLogo" class="mb-2" :title=team.name>
@@ -23,18 +24,18 @@
 <script>
 import axios from 'axios';
 import TeamCard from './TeamCard';
+import LeagueLeaders from './LeagueLeaders';
 
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
-  },
   components:{
-    TeamCard
+    TeamCard,
+    LeagueLeaders
   },
   data() {
     return {
-      teams: []
+      teams: [],
+      types: ['hits','ops', 'homeruns', 'avg']
     }
   },
   methods:{
@@ -58,6 +59,9 @@ export default {
     width:10%;
     background-color: grey;
     border: 1px solid black;
+}
+.teamdiv{
+  margin-top: 10px;
 }
 
 

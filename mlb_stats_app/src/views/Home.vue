@@ -1,7 +1,5 @@
 <template>
   <v-app id="app">
-    
-
     <v-content>
       <Header/>
       <LandingPage/>
