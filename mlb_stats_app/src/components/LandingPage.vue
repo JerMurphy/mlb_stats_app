@@ -15,6 +15,7 @@
         </div>
         <div style="margin-top:15px; margin-right: 20px;">
         <h3> League Leaders</h3>
+        <p style="font-size: 12px;">as of: 2019-08-28</p>
         <LeagueLeaders v-bind:teams="teams"/>
         </div>
       </v-col>
