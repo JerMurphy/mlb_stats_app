@@ -3,7 +3,7 @@
     <v-row style="margin-left: 15px">
       <v-col cols="lg-3">
         <h3> Teams</h3>
-        <div style="overflow-y: auto; height:600px">
+        <div style="overflow-y: auto; height:85vh">
           <TeamCard v-bind:team="team" v-for="team in teams" :key="team.id" class="teamdiv"/>
         </div>
       </v-col>

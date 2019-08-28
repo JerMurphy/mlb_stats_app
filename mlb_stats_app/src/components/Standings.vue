@@ -4,7 +4,7 @@
                 <v-icon>{{type}}</v-icon>
         </v-tab>
         <v-tab-item v-for="type in types" v-bind:key="type">
-            <div v-if="type == 'American League'" style="height:300px; overflow-y:scroll">
+            <div v-if="type == 'American League'" style="height:50vh; overflow-y:scroll">
                 <h4> AL East</h4>
                 <v-simple-table class="pitcherTable" height="300px" fixedHeader>
                     <thead>
@@ -102,7 +102,7 @@
                     </tbody>
                 </v-simple-table>
             </div>
-            <div v-if="type == 'National League'" style="height:300px; overflow-y:scroll">
+            <div v-if="type == 'National League'" style="height:50vh; overflow-y:scroll">
                 <h4> NL East</h4>
                 <v-simple-table class="pitcherTable" height="300px" fixedHeader>
                     <thead>
