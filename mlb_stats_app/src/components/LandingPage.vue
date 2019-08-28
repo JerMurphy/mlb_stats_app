@@ -8,16 +8,17 @@
         </div>
       </v-col>
       <v-col>
+        <div style=" margin-right: 20px;">
+        <h3> Standings</h3>
+        <p style="font-size: 12px;">as of: 2019-08-28</p>
+        <Standings/>
+        </div>
+        <div style="margin-top:15px; margin-right: 20px;">
         <h3> League Leaders</h3>
-        <LeagueLeaders/>
+        <LeagueLeaders v-bind:teams="teams"/>
+        </div>
       </v-col>
     </v-row>
-      <!-- <mdb-col md="4" v-for="team in teams" v-bind:key="team.id"> -->
-        
-        <!-- <b-card :img-src=returnImg(team.id) img-top id="teamLogo" class="mb-2" :title=team.name>
-            <b-button href="#" variant="primary">View Team Stats</b-button>
-        </b-card>   -->
-
   </div>
 </template>
 
@@ -25,12 +26,14 @@
 import axios from 'axios';
 import TeamCard from './TeamCard';
 import LeagueLeaders from './LeagueLeaders';
+import Standings from './Standings';
 
 export default {
   name: 'HelloWorld',
   components:{
     TeamCard,
-    LeagueLeaders
+    LeagueLeaders,
+    Standings
   },
   data() {
     return {

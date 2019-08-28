@@ -24,6 +24,7 @@ export default {
 </script>
 <style >
   #app{
-    text-align: center
+    text-align: center;
+    background-color: lightsteelblue
   }
 </style>

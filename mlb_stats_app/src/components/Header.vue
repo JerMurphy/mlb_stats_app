@@ -44,6 +44,6 @@ export default {
   margin-top: 10px
 }
 .header{
-  background-color: aliceblue;
+  background-color: lightgray;
 }
 </style>

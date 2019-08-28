@@ -56,24 +56,10 @@ var colors = {
             "margin-left": "10px"
         }
     },
-    '140': { // Rangers
-        color: "#C00F20",
-        text: {
-            color:"white",
-            "margin-left": "10px"
-        }
-    },
     '141': { //Jays
         color: "#134A8E",
         text: {
             "color":"white",
-            "margin-left": "10px"
-        }
-    },
-    '142': { //Twins
-        color: "#002B5C",
-        text: {
-            color:"white",
             "margin-left": "10px"
         }
     },
