@@ -23,7 +23,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="team in ale" :key="team" > 
+                    <tr v-for="team in ale" :key="team.team_id" > 
                         <td>{{team.ordinal_rank}}</td>
                         <td>{{team.first_name}} {{team.last_name}}</td>
                         <td>{{team.won}}</td>
@@ -55,7 +55,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="team in alc" :key="team" > 
+                    <tr v-for="team in alc" :key="team.team_id" > 
                         <td>{{team.ordinal_rank}}</td>
                         <td>{{team.first_name}} {{team.last_name}}</td>
                         <td>{{team.won}}</td>
@@ -87,7 +87,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="team in alw" :key="team" > 
+                    <tr v-for="team in alw" :key="team.team_id" > 
                        <td>{{team.ordinal_rank}}</td>
                         <td>{{team.first_name}} {{team.last_name}}</td>
                         <td>{{team.won}}</td>
@@ -122,7 +122,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="team in nle" :key="team" > 
+                    <tr v-for="team in nle" :key="team.team_id" > 
                         <td>{{team.ordinal_rank}}</td>
                         <td>{{team.first_name}} {{team.last_name}}</td>
                         <td>{{team.won}}</td>
@@ -154,7 +154,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="team in nlc" :key="team" > 
+                    <tr v-for="team in nlc" :key="team.team_id" > 
                         <td>{{team.ordinal_rank}}</td>
                         <td>{{team.first_name}} {{team.last_name}}</td>
                         <td>{{team.won}}</td>
@@ -186,7 +186,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="team in nlw" :key="team" > 
+                    <tr v-for="team in nlw" :key="team.team_id" > 
                         <td>{{team.ordinal_rank}}</td>
                         <td>{{team.first_name}} {{team.last_name}}</td>
                         <td>{{team.won}}</td>

@@ -29,6 +29,60 @@
             <td class="text-center">{{year.stat.strikeOuts}}</td>
             <td class="text-center">{{year.stat.baseOnBalls}}</td>
             <td class="text-center">{{year.stat.strikePercentage}}</td>
+            <td class="text-center">
+                <div class="text-center">
+                    <v-dialog v-model="dialog" width="1000">
+                        <template v-slot:activator="{ on }">
+                            <v-btn dark v-on="on"   color="#2076D2" outlined><v-icon>mdi-chart-pie</v-icon></v-btn>
+                        </template>
+                        <v-card>
+                            <v-card-title class="headline grey lighten-2" primary-title>
+                            <span class="centered">{{year.season}} - {{year.team.name}}</span>
+                            </v-card-title>
+                            <v-card-text>
+                            <v-row>
+                                <v-col>
+                                    <h3> Pitch Placement Breakdown</h3>
+                                    <h5> (Strikes, Non-Strikes</h5>
+                                    <d3-pie
+                                        :data="getPitchData(year.stat.numberOfPitches, year.stat.strikes)"
+                                        :options="options"
+                                        width="100%"
+                                        height="400px">
+                                    </d3-pie>
+                                    <h5> Figure 1.A</h5>
+                                </v-col>
+                                <v-col>
+                                    <h3> Pitching Results Breakdown</h3>
+                                    <h5> (Strikeouts, Walks, Hits, Ground Outs, Air Outs)</h5>
+                                    <d3-pie
+                                        :data="getResultData(year.stat.strikeOuts, year.stat.baseOnBalls, year.stat.hits,year.stat.groundOuts, year.stat.airOuts)"
+                                        :options="options"
+                                        width="100%"
+                                        height="400px">
+                                    </d3-pie>
+                                    <h5> Figure 1.B</h5>
+                                </v-col>
+                            </v-row>
+                             <v-row>
+                               <v-col cols="md-6">
+                                 {{name}}, as broken down above in Figure 1.A, had a {{year.stat.strikePercentage}}% Strike percentage over the year.
+                               </v-col>
+                                <v-col cols="md-6">
+                                    
+                                    When facing an opposing batter, {{name}}, as broken down above in Figure 1.B, had a {{strP}}% chance of striking the batter out. A {{wlkP}}% chance of walking the batter. A {{hP}}% chance of giving up a hit resulting in at least one base and a {{goP}}% chance and {{aoP}}% chance of the batter getting out by ground out or air out respectively.
+
+                                    
+                                </v-col>
+                                
+                            </v-row>
+                            </v-card-text>
+
+                            <v-divider></v-divider>
+                        </v-card>
+                    </v-dialog>
+                </div>
+            </td>
         </tr>
         </tbody>
     </v-simple-table>
@@ -41,18 +95,34 @@
 export default {
   name: 'PitchingStats',
   props: {
-    stats: []
+    stats: [],
+    name: String
   },
   data() {
     return {
-    
+        strP: Number,
+        wlkP: Number,
+        hP: Number,
+        goP: Number,
+        aoP: Number
     }
   },
   created(){
     this.stats = _.orderBy(this.stats,['season'], ['desc'])
   },
   methods: {
-    
+    getPitchData(p,s){
+      return [{key: 'Strikes', value: s},{key: 'Non-Strikes (Balls,Fouls,etc)', value: parseInt(p-s)}];
+    },
+    getResultData(s,w,h,g,a){
+        var total = s+w+h+g+a;
+        this.strP =(parseInt(s)/total*100).toFixed(0)
+        this.wlkP =(parseInt(w)/total*100).toFixed(0)
+        this.hP =(parseInt(h)/total*100).toFixed(0)
+        this.goP =(parseInt(g)/total*100).toFixed(0)
+        this.aoP =(parseInt(a)/total*100).toFixed(0)
+        return [{key: 'Strike Outs', value: s},{key: 'Walks', value: w},{key: 'Hits', value: h},{key: 'Gound Outs', value: g},{key: 'Air Outs', value: a}];
+    },
   }
   
 }

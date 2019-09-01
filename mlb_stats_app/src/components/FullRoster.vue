@@ -20,10 +20,10 @@
             <tbody>
             <tr v-for="player in roster" :key="player.person.id" v-if="player.person.primaryPosition.name != 'Pitcher'"> 
                 <td>
-                    <!-- <img :src="getImage(player.person.id)" height="90px" width="75px"> -->
-                    <v-avatar size="75px" class="avatar">
+                    <img :src="getImage(player.person.id)" height="80px" width="70px" style="margin-top:5px">
+                    <!-- <v-avatar size="75px" class="avatar">
                         <img :src="getImage(player.person.id)">
-                    </v-avatar>
+                    </v-avatar> -->
                 </td>
                 <td>{{ player.person.fullName }}</td>
                 <td>{{ player.person.primaryNumber }}</td>
@@ -59,10 +59,10 @@
             <tbody>
             <tr v-for="player in roster" :key="player.person.id" v-if="player.person.primaryPosition.name == 'Pitcher'">
                 <td>
-                    <!-- <img :src="getImage(player.person.id)" height="90px" width="75px"> -->
-                    <v-avatar size="75px" class="avatar">
+                    <img :src="getImage(player.person.id)" height="80px" width="70px" style="margin-top:5px">
+                    <!-- <v-avatar size="75px" class="avatar">
                         <img :src="getImage(player.person.id)">
-                    </v-avatar>
+                    </v-avatar> -->
                 </td>
                 <td>{{ player.person.fullName }}</td>
                 <td>{{ player.person.primaryNumber }}</td>
@@ -128,6 +128,7 @@ export default {
    }
    .more:hover{
        text-decoration: underline;
+       cursor: pointer;
    }
 
 </style>

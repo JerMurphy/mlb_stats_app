@@ -4,7 +4,7 @@
     <v-toolbar-title>
       <img class="logo" :src="require('../assets/mlblogo.png')" contain height="75"/>
     </v-toolbar-title>
-    <h2>My Stats App</h2>
+    <h2>Statistics Dashboard</h2>
     <div class="flex-grow-1" >
         
     </div>

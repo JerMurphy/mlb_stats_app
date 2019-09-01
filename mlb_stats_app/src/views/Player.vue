@@ -10,21 +10,20 @@
         </v-toolbar>
     </v-card>
    <PlayerProfile v-bind:id="pid" v-bind:player="player" v-if="player"/>
-   <v-tabs fixed-tabs >
+   <v-tabs fixed-tabs>
             <v-tab ripple v-for="type in player.stats" v-bind:key="type.group.displayName">
                  <v-icon>{{type.group.displayName.toUpperCase()}}</v-icon>
             </v-tab>
             <v-tab-item v-for="type in player.stats" v-bind:key="type.group.displayName" style="height:45vh;">
+                <div v-if="type.group.displayName == 'pitching'">
+                    <PitchingStats v-bind:stats="type.splits" v-bind:name="player.firstName"/>
+                </div>
                 <div v-if="type.group.displayName == 'hitting'" >
-                    <HittingStats v-bind:stats="type.splits"/>
+                    <HittingStats v-bind:stats="type.splits" v-bind:name="player.firstName"/>
                 </div>
                 <div v-if="type.group.displayName == 'fielding'">
                     <FieldingStats v-bind:stats="type.splits"/>
-                </div>
-                <div v-if="type.group.displayName == 'pitching'">
-                    <PitchingStats v-bind:stats="type.splits"/>
-                </div>
-                
+                </div>                
             </v-tab-item>
         </v-tabs>
   </v-app>

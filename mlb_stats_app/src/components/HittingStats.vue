@@ -59,7 +59,7 @@
                 <div class="text-center">
                     <v-dialog v-model="dialog" width="1000">
                         <template v-slot:activator="{ on }">
-                            <v-btn dark v-on="on">More</v-btn>
+                            <v-btn dark v-on="on"   color="#2076D2" outlined><v-icon>mdi-chart-pie</v-icon></v-btn>
                         </template>
                         <v-card>
                             <v-card-title class="headline grey lighten-2" primary-title>
@@ -69,13 +69,14 @@
                             <v-row>
                                 <v-col>
                                     <h3> Plate Appearence Breakdown</h3>
-                                    <h5> (Hits, Strikeouts,Walks)</h5>
+                                    <h5> (Hits, Strikeouts,Walks,Ground Outs, Fly Outs)</h5>
                                     <d3-pie
-                                        :data="getPlateData(year.stat.hits,year.stat.strikeOuts, year.stat.baseOnBalls)"
+                                        :data="getPlateData(year.stat.hits,year.stat.strikeOuts, year.stat.baseOnBalls, year.stat.groundOuts, year.stat.plateAppearances)"
                                         :options="options"
                                         width="100%"
                                         height="400px">
                                     </d3-pie>
+                                    <h5> Figure 1.A</h5>
                                 </v-col>
                                 <v-col>
                                     <h3> Hit Placement Breakdown</h3>
@@ -85,7 +86,22 @@
                                         width="100%"
                                         height="400px">
                                     </d3-pie>
+                                    <h5> Figure 1.B</h5>
                                 </v-col>
+                            </v-row>
+                            <v-row>
+                               <v-col cols="md-2">
+                               </v-col>
+                                <v-col cols="md-8">
+                                    
+                                    {{name}}, as broken down in Figure 1.A, had a {{parseFloat(year.stat.avg)*100}}% chance of reaching base by hitting the 
+                                    ball in to play and of those hits, as broken down in Figure 1.B, had a {{hitObj.single}}% chance of reaching by single, a 
+                                    {{hitObj.double}}% change of reaching by double, a {{hitObj.triple}}% chance of reaching by triple and a {{hitObj.hr}}% chance of hitting a HomeRun
+
+                                    
+                                </v-col>
+                                <v-col cols="md-2">
+                               </v-col>
                             </v-row>
                             </v-card-text>
 
@@ -107,21 +123,30 @@
 export default {
   name: 'HittingStats',
   props: {
-    stats: []
+    stats: [],
+    name: String
   },
   data() {
     return {
         data: [],
+        hitObj: Object
     }
   },
   created(){
     this.stats = _.orderBy(this.stats,['season'], ['desc'])
   },
   methods: {
-    getPlateData(hits,str,walks){
-        return [{key: 'Hits', value: hits},{key: 'Strikeouts', value: str}, {key: 'Walks', value: walks}];
+    getPlateData(hits,str,walks,go,pa){
+        var fo = parseInt(pa)-parseInt(hits)-parseInt(str)-parseInt(walks)-parseInt(go);
+        return [{key: 'Hits', value: hits},{key: 'Strikeouts', value: str}, {key: 'Walks', value: walks},{key: 'Ground Outs', value: go},{key: 'Fly Outs', value: fo}];
     },
     getHitData(hits,d,t,hr){
+        this.hitObj = {
+            single: (parseInt(hits-d-t-hr)/parseInt(hits)*100).toFixed(0),
+            double: (parseInt(d)/parseInt(hits)*100).toFixed(0),
+            triple: (parseInt(t)/parseInt(hits)*100).toFixed(0),
+            hr: (parseInt(hr)/parseInt(hits)*100).toFixed(0)
+        }
         return [{key: 'Singles', value: hits-d-t-hr},{key: 'Doubles', value: d}, {key: 'Triples', value: t},{key: 'Home Runs', value: hr}];
     }
   }

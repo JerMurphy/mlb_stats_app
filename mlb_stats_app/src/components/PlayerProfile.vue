@@ -4,7 +4,7 @@
             <v-col :md="1">
             </v-col>
             <v-col :md="3">
-                <v-img :src="getImage(id)" contain height="300px" width="200px" style="margin-left: 70px; text-align: center"></v-img>
+                <v-img :src="getImage(id)" contain height="300px" width="200px" style="margin-left: 25%"/>
                 <h1>{{player.fullName}} #{{player.primaryNumber}}</h1>
                  <h3>{{player.primaryPosition.name}} </h3>
             </v-col>
