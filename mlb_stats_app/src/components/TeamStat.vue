@@ -114,9 +114,15 @@ export default {
             _.forEach(roster, function(player){
                 if(player.person.stats){
                     //some players dont have a stats object??
-                    avgarr.push(parseFloat(player.person.stats[0].splits[0].stat.avg));
+                    if(player.person.stats[0].splits[0].stat.avg && player.person.stats[0].splits[0].stat.avg != '.---'){
+                        avgarr.push(parseFloat(player.person.stats[0].splits[0].stat.avg));
+                    }
+                    if(player.person.stats[0].splits[0].stat.obp && player.person.stats[0].splits[0].stat.obp != '.---'){
                     obparr.push(parseFloat(player.person.stats[0].splits[0].stat.obp));
+                    }
+                    if(player.person.stats[0].splits[0].stat.slg && player.person.stats[0].splits[0].stat.slg != '.---'){
                     slgarr.push(parseFloat(player.person.stats[0].splits[0].stat.slg));
+                    }
 
                     hrarr.push(parseFloat(player.person.stats[0].splits[0].stat.homeRuns));
                     if(player.person.stats[0].splits[0].stat.rbi){
