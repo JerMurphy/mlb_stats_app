@@ -40,7 +40,7 @@
                             <th class="text-center">Name</th>
                             <th class="text-center">Team</th>
                             <th class="text-center">Position</th>
-                            <th class="text-center">Hits</th>
+                            <th class="text-center">OPS</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -60,7 +60,7 @@
                         </tbody>
                     </v-simple-table>
                 </div>
-                <div v-if="type == 'homeruns'">
+                <div v-if="type == 'HR'">
                     <v-simple-table class="leaderTable" fixedHeader>
                         <thead>
                         <tr>
@@ -68,7 +68,7 @@
                             <th class="text-center">Name</th>
                             <th class="text-center">Team</th>
                             <th class="text-center">Position</th>
-                            <th class="text-center">Hits</th>
+                            <th class="text-center">Homeruns</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -96,7 +96,7 @@
                             <th class="text-center">Name</th>
                             <th class="text-center">Team</th>
                             <th class="text-center">Position</th>
-                            <th class="text-center">Hits</th>
+                            <th class="text-center">AVG</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -121,7 +121,7 @@
                             <th class="text-center">Name</th>
                             <th class="text-center">Team</th>
                             <th class="text-center">Position</th>
-                            <th class="text-center">Hits</th>
+                            <th class="text-center">SLG</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -146,7 +146,7 @@
                             <th class="text-center">Name</th>
                             <th class="text-center">Team</th>
                             <th class="text-center">Position</th>
-                            <th class="text-center">Hits</th>
+                            <th class="text-center">OBP</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -171,7 +171,7 @@
                             <th class="text-center">Name</th>
                             <th class="text-center">Team</th>
                             <th class="text-center">Position</th>
-                            <th class="text-center">Hits</th>
+                            <th class="text-center">RBI's</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -188,7 +188,7 @@
                         </tbody>
                     </v-simple-table>
                 </div>
-                <div v-if="type == 'strikeouts'">
+                <div v-if="type == 'SO'">
                     <v-simple-table class="leaderTable" fixedHeader>
                         <thead>
                         <tr>
@@ -196,7 +196,7 @@
                             <th class="text-center">Name</th>
                             <th class="text-center">Team</th>
                             <th class="text-center">Position</th>
-                            <th class="text-center">Hits</th>
+                            <th class="text-center">Strikeouts</th>
                         </tr>
                         </thead>
                         <tbody>
