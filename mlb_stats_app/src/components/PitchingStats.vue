@@ -17,7 +17,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="year in stats" :key="year.season" v-if="year.team"> 
+        <tr v-for="(year,i) in stats" :key="year.season" v-if="year.team"> 
             <td class="text-center">{{year.season}}</td>
             <td class="text-center">{{year.team.name}}</td>
             <td class="text-center">{{year.stat.gamesPlayed}}</td>
@@ -45,8 +45,7 @@
                                     <h3> Pitch Placement Breakdown</h3>
                                     <h5> (Strikes, Non-Strikes</h5>
                                     <d3-pie
-                                        :data="getPitchData(year.stat.numberOfPitches, year.stat.strikes)"
-                                        :options="options"
+                                        :data="pitchingObj.pitchData[i]"
                                         width="100%"
                                         height="400px">
                                     </d3-pie>
@@ -56,8 +55,7 @@
                                     <h3> Pitching Results Breakdown</h3>
                                     <h5> (Strikeouts, Walks, Hits, Ground Outs, Air Outs)</h5>
                                     <d3-pie
-                                        :data="getResultData(year.stat.strikeOuts, year.stat.baseOnBalls, year.stat.hits,year.stat.groundOuts, year.stat.airOuts)"
-                                        :options="options"
+                                        :data="pitchingObj.resultData.values[i]"
                                         width="100%"
                                         height="400px">
                                     </d3-pie>
@@ -70,7 +68,7 @@
                                </v-col>
                                 <v-col cols="md-6">
                                     
-                                    When facing an opposing batter, {{name}}, as broken down above in Figure 1.B, had a {{strP}}% chance of striking the batter out. A {{wlkP}}% chance of walking the batter. A {{hP}}% chance of giving up a hit resulting in at least one base and a {{goP}}% chance and {{aoP}}% chance of the batter getting out by ground out or air out respectively.
+                                    When facing an opposing batter, {{name}}, as broken down above in Figure 1.B, had a {{pitchingObj.resultData.resultObj[i].strP}}% chance of striking the batter out. A {{pitchingObj.resultData.resultObj[i].wlkP}}% chance of walking the batter. A {{pitchingObj.resultData.resultObj[i].hP}}% chance of giving up a hit resulting in at least one base and a {{pitchingObj.resultData.resultObj[i].goP}}% chance and {{pitchingObj.resultData.resultObj[i].aoP}}% chance of the batter getting out by ground out or air out respectively.
 
                                     
                                 </v-col>
@@ -91,6 +89,7 @@
 
 <script>
     import _ from 'lodash';
+    import axios from 'axios';
 
 export default {
   name: 'PitchingStats',
@@ -100,15 +99,12 @@ export default {
   },
   data() {
     return {
-        strP: Number,
-        wlkP: Number,
-        hP: Number,
-        goP: Number,
-        aoP: Number
+        pitchingObj: Object
     }
   },
   created(){
     this.stats = _.orderBy(this.stats,['season'], ['desc'])
+    axios.post('/pitchingStats', this.stats).then(res => this.pitchingObj = res.data);
   },
   methods: {
     getPitchData(p,s){

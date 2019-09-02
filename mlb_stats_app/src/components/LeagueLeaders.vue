@@ -229,11 +229,11 @@ export default {
     },
     data() {
         return {
-        types: ['avg','slg','obp','ops','hits', "rbi", 'homeruns', 'strikeouts']
+        types: ['avg','slg','obp','ops','hits', "rbi", 'HR', 'SO']
         }
     },
     created(){
-        axios.post('http://localhost:5000/leagueLeaders', this.teams).then(res => this.leaders = res.data);
+        axios.post('/leagueLeaders', this.teams).then(res => this.leaders = res.data);
     },
     methods: {
         getImage(id){

@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row style="margin-left: 15px;">
-      <v-col cols="lg-2" style="text-align: center">
+      <v-col cols="lg-3" style="text-align: center">
         <h3> Teams </h3>
           <p style="font-size: 12px;"></p>
         <div style="overflow-y: auto; height:80vh;">

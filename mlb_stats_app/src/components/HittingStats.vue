@@ -41,7 +41,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="year in stats" :key="year.season" v-if="year.team"> 
+        <tr v-for="(year,i) in stats" :key="year.season" v-if="year.team"> 
             <td class="text-center">{{year.season}}</td>
             <td class="text-center">{{year.team.name}}</td>
             <td class="text-center">{{year.stat.avg}}</td>
@@ -71,8 +71,7 @@
                                     <h3> Plate Appearence Breakdown</h3>
                                     <h5> (Hits, Strikeouts,Walks,Ground Outs, Fly Outs)</h5>
                                     <d3-pie
-                                        :data="getPlateData(year.stat.hits,year.stat.strikeOuts, year.stat.baseOnBalls, year.stat.groundOuts, year.stat.plateAppearances)"
-                                        :options="options"
+                                        :data="hittingObj.plateData[i]"
                                         width="100%"
                                         height="400px">
                                     </d3-pie>
@@ -82,7 +81,7 @@
                                     <h3> Hit Placement Breakdown</h3>
                                     <h5> (Singles, Doubles, Triples, Home Runs)</h5>
                                     <d3-pie
-                                        :data="getHitData(year.stat.hits,year.stat.doubles, year.stat.triples, year.stat.homeRuns)"
+                                        :data="hittingObj.hitData.values[i]"
                                         width="100%"
                                         height="400px">
                                     </d3-pie>
@@ -95,8 +94,8 @@
                                 <v-col cols="md-8">
                                     
                                     {{name}}, as broken down in Figure 1.A, had a {{parseFloat(year.stat.avg)*100}}% chance of reaching base by hitting the 
-                                    ball in to play and of those hits, as broken down in Figure 1.B, had a {{hitObj.single}}% chance of reaching by single, a 
-                                    {{hitObj.double}}% change of reaching by double, a {{hitObj.triple}}% chance of reaching by triple and a {{hitObj.hr}}% chance of hitting a HomeRun
+                                    ball in to play and of those hits, as broken down in Figure 1.B, had a {{hittingObj.hitData.hitObj[i].single}}% chance of reaching by single, a 
+                                    {{hittingObj.hitData.hitObj[i].double}}% change of reaching by double, a {{hittingObj.hitData.hitObj[i].triple}}% chance of reaching by triple and a {{hittingObj.hitData.hitObj[i].hr}}% chance of hitting a HomeRun
 
                                     
                                 </v-col>
@@ -119,6 +118,7 @@
 
 <script>
     import _ from 'lodash';
+    import axios from 'axios';
 
 export default {
   name: 'HittingStats',
@@ -129,11 +129,16 @@ export default {
   data() {
     return {
         data: [],
-        hitObj: Object
+        hitObj: Object,
+        hittingObj: Object
     }
   },
   created(){
-    this.stats = _.orderBy(this.stats,['season'], ['desc'])
+    this.stats = _.orderBy(this.stats,['season'], ['desc']);
+    axios.post('/hittingStats', this.stats).then(res => this.hittingObj = res.data);
+    // axios.post('http://localhost:5000/hittingStats', this.stats)
+    // .then(res => this.hittingObj = res.data)
+    // .catch(err => alert(err));
   },
   methods: {
     getPlateData(hits,str,walks,go,pa){
@@ -141,6 +146,7 @@ export default {
         return [{key: 'Hits', value: hits},{key: 'Strikeouts', value: str}, {key: 'Walks', value: walks},{key: 'Ground Outs', value: go},{key: 'Fly Outs', value: fo}];
     },
     getHitData(hits,d,t,hr){
+        
         this.hitObj = {
             single: (parseInt(hits-d-t-hr)/parseInt(hits)*100).toFixed(0),
             double: (parseInt(d)/parseInt(hits)*100).toFixed(0),
